@@ -26,8 +26,4 @@ Deno.test({
   }
 });
 
-Deno.test(function example(): void {
-  assertEquals("hello", "hello");
-});
-
 await Deno.runTests;

@@ -17,13 +17,26 @@ export class Graph {
     this.adjList.get(n2)?.push(n1);
   }
 
-  public removeNode(node: number) {
+  public removeNode(item: number) {
+    this.nodes = this.nodes.filter(node => {
+      return node !== item;
+    });
 
+    while (this.adjList.get(item)?.length) {
+      let adjacentNode = this.adjList.get(item)?.pop();
+      if (adjacentNode) {
+        this.removeEdge(item, adjacentNode);
+      }
+    }
   }
 
-  // public removeEdge(node1: number, node2: number) {
+  public removeEdge(n1: number, n2: number) {
+    const n2Index = this.adjList.get(n1)?.indexOf(n2) ?? -1;
+    const n1Index = this.adjList.get(n2)?.indexOf(n1) ?? -1;
+    this.adjList.get(n1)?.splice(n2Index, 1);
+    this.adjList.get(n2)?.splice(n1Index, 1);
 
-  // }
+  }
 
   // public depthFirstTraversal(startingNode: number, callback = console.log) {
   //   const nodeStack = [];
